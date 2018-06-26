@@ -21,5 +21,13 @@ namespace apiassignment.business
             ls = (new ParentRepository().GetParentTasksById(id));
             return ls;
         }
+
+        public List<Parent> PostTaskById(Parent ts)
+        {
+            List<Parent> ls;
+            ls = (new ParentRepository().PostTaskById(ts));
+            return ls;
+        }
+
     }
 }

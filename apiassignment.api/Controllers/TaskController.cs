@@ -13,13 +13,27 @@ namespace apiassignment.api.Controllers
         // GET: api/Task
         public HttpResponseMessage Get()
         {
-            IEnumerable<Task> dt = new TaskBusiness().GetTasks();
-            if ((dt == null) || (dt.Count() == 0))
+            string msg = "";
+            IEnumerable<Task> dt = null;
+            try
             {
+                dt = new TaskBusiness().GetTasks();
+            }
+            catch(Exception ex)
+            {
+                msg = ex.Message;
+            }
+              
+            if ((dt == null) || (msg != "") || (dt.Count() == 0))
+            {
+                if (msg == "")
+                {
+                    msg = "No tasks found";
+                }
                 var response = new HttpResponseMessage(HttpStatusCode.NotFound)
                 {
-                    Content = new StringContent(string.Format("No tasks found")),  
-                        ReasonPhrase = "No task found"
+                    Content = new StringContent(string.Format(msg)),  
+                        ReasonPhrase = "Error"
                 };
                 return response;
             }
@@ -31,13 +45,27 @@ namespace apiassignment.api.Controllers
         //public IEnumerable<Task> Get(int id)
         public HttpResponseMessage Get(int id)
         {
-            IEnumerable<Task> dt = new TaskBusiness().GetTasksById(id);
-            if ((dt == null) || (dt.Count() == 0))
+            string msg = "";
+            IEnumerable <Task> dt = null;
+            try
             {
+                dt = new TaskBusiness().GetTasksById(id);
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+            }
+
+            if ((dt == null) || (msg != "") || (dt.Count() == 0))
+            {
+                if (msg == "")
+                {
+                    msg = "No tasks found by Id " + id;
+                }
                 var response = new HttpResponseMessage(HttpStatusCode.NotFound)
                 {
-                    Content = new StringContent(string.Format("No tasks found by Id " + id)),
-                    ReasonPhrase = "No task found"
+                    Content = new StringContent(string.Format(msg)),
+                    ReasonPhrase = "Error"
                 };                
                 return response;
             }
@@ -46,18 +74,105 @@ namespace apiassignment.api.Controllers
         }
 
         // POST: api/Task
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]Task ts)
         {
+            IEnumerable<Task> key = null;
+            string msg = "";           
+            try
+            {
+                key = new TaskBusiness().PostTaskById(ts);
+            
+            }
+            catch(Exception ex)
+            {
+                msg = ex.Message;
+
+            }
+            if ((key == null) || (msg != "") || (key.Count() == 0))
+            {
+                if (msg == "")
+                {
+                    msg = "Error in posting task";
+                }                  
+                var response = new HttpResponseMessage(HttpStatusCode.Conflict)
+                {
+                    Content = new StringContent(string.Format(msg)),
+                    ReasonPhrase = "Error"
+                };
+                return response;
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, key);
         }
 
         // PUT: api/Task/5
-        public void Put(int id, [FromBody]string value)
+        public HttpResponseMessage Put(int id, Task ts)
         {
+            string msg = "";
+            IEnumerable<Task> key = null;
+            HttpResponseMessage response;
+            if (id != ts.Task_Id)
+            {
+                msg = "Task id not matching";
+                response = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                response.Content = new StringContent(string.Format(msg));
+                response.ReasonPhrase = "Error";
+                return response;
+            }
+            try
+            {
+                key = new TaskBusiness().PutTaskById(id, ts);
+
+            }
+            catch(Exception ex)
+            {
+                msg = ex.Message;
+            }
+            if ((key == null) || (msg != "") || (key.Count() == 0))
+            {
+                if (msg == "")
+                {
+                    msg = "Error in updating task";
+                }
+                response = new HttpResponseMessage(HttpStatusCode.Conflict)
+                {
+                    Content = new StringContent(string.Format(msg)),
+                    ReasonPhrase = "Error"
+                };
+                return response;
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, key);
+
         }
 
         // DELETE: api/Task/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            string msg = "";
+            int key = id;
+            HttpResponseMessage response;           
+            try
+            {
+                key = new TaskBusiness().DeleteTaskById(id);
+
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+            }
+            if (key != 0)
+            {
+                if (msg == "")
+                {
+                    msg = "Error in deleting task";
+                }
+                response = new HttpResponseMessage(HttpStatusCode.Conflict)
+                {
+                    Content = new StringContent(string.Format(msg)),
+                    ReasonPhrase = "Error"
+                };
+                return response;
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, key);
         }
     }
 }

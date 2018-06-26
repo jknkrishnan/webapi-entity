@@ -21,5 +21,26 @@ namespace apiassignment.business
             ls = (new TaskRepository().GetTasksById(Id));
             return ls;
         }
+
+        public List<Task> PostTaskById(Task ts)
+        {
+            List<Task> ls;
+            ls = (new TaskRepository().PostTaskById(ts));
+            return ls;
+        }
+
+        public List<Task> PutTaskById(int id, Task ts)
+        {
+            List<Task> ls;
+            ls = (new TaskRepository().PutTaskById(id,ts));
+            return ls;
+        }
+
+        public int DeleteTaskById(int id)
+        {
+            int l;
+            l = (new TaskRepository().DeleteTaskById(id));
+            return l;
+        }
     }
 }

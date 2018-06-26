@@ -27,5 +27,20 @@ namespace apiassignment
             }
             return ls;
         }
+
+        public List<Parent> PostTaskById(Parent ts)
+        {
+            int key = 0;
+            List<Parent> ls;
+            using (var taskcontext = new ParentContext())
+            {
+                taskcontext.Parent.Add(ts);
+                taskcontext.SaveChanges();
+                key = ts.Parent_Id;
+                ls = taskcontext.Parent.Where(p => p.Parent_Id == key).ToList();
+
+            }
+            return ls;
+        }
     }
 }
