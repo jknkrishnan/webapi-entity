@@ -276,6 +276,10 @@
       <Project>{67c6a2ba-4a3c-41ae-8780-71712bebef6e}</Project>
       <Name>apiassignment.business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\apiassignment.datacontext\apiassignment.datacontext.csproj">
+      <Project>{351c9e28-8335-4f92-a125-516fbdc53e03}</Project>
+      <Name>apiassignment.datacontext</Name>
+    </ProjectReference>
     <ProjectReference Include="..\apiassignment.entities\apiassignment.entities.csproj">
       <Project>{74DA8C18-7A57-4D74-86D2-63E4D3C8E76F}</Project>
       <Name>apiassignment.entities</Name>

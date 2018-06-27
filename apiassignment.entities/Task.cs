@@ -15,6 +15,6 @@ namespace apiassignment
         public string TaskDesc { get; set; }
         public DateTime strDate { get; set; }
         public DateTime endDate { get; set; }
-        //public DateTime priority { get; set; } 
+        public int priority { get; set; } 
     }
 }
