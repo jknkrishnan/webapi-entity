@@ -105,22 +105,15 @@ namespace apiassignment.api.Controllers
         }
 
         // PUT: api/Task/5
-        public HttpResponseMessage Put(int id, Task ts)
+        public HttpResponseMessage Put([FromBody] Task ts)
         {
             string msg = "";
             IEnumerable<Task> key = null;
             HttpResponseMessage response;
-            if (id != ts.Task_Id)
-            {
-                msg = "Task id not matching";
-                response = new HttpResponseMessage(HttpStatusCode.BadRequest);
-                response.Content = new StringContent(string.Format(msg));
-                response.ReasonPhrase = "Error";
-                return response;
-            }
+            
             try
             {
-                key = new TaskBusiness().PutTaskById(id, ts);
+                key = new TaskBusiness().PutTaskById(ts);
 
             }
             catch(Exception ex)

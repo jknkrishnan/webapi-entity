@@ -44,7 +44,7 @@ namespace apiassignment
             return ls;
         }
 
-        public List<Task> PutTaskById(int id, Task ts)
+        public List<Task> PutTaskById(Task ts)
         {
             int key = 0;
             List<Task> ls;

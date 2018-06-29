@@ -29,10 +29,10 @@ namespace apiassignment.business
             return ls;
         }
 
-        public List<Task> PutTaskById(int id, Task ts)
+        public List<Task> PutTaskById(Task ts)
         {
             List<Task> ls;
-            ls = (new TaskRepository().PutTaskById(id,ts));
+            ls = (new TaskRepository().PutTaskById(ts));
             return ls;
         }
 

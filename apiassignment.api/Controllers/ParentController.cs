@@ -25,9 +25,10 @@ namespace apiassignment.api.Controllers
             }
             if ((dt == null) || (msg != "") || (dt.Count() == 0))
             {
-                if (msg != "")
+                if (msg == "")
                 {
                     msg = "No tasks found";
+                    return Request.CreateResponse(HttpStatusCode.OK, dt);
                 }
                 var response = new HttpResponseMessage(HttpStatusCode.NotFound)
                 {
@@ -54,9 +55,10 @@ namespace apiassignment.api.Controllers
             }
             if ((dt == null) || (msg != "") || (dt.Count() == 0))
             {
-                if (msg != "")
+                if (msg == "")
                 {
                     msg = "No tasks found by Id " + id;
+                    return Request.CreateResponse(HttpStatusCode.OK, dt);
                 }
                 var response = new HttpResponseMessage(HttpStatusCode.NotFound)
                 {
