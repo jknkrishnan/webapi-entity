@@ -55,8 +55,14 @@ namespace apiassignment.api.Controllers.Tests
             p.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             p.Request.SetConfiguration(new HttpConfiguration());
             HttpResponseMessage _http;
-            _http = p.Get();
-            Assert.AreEqual(HttpStatusCode.OK, _http.StatusCode);                     
+            try { 
+                _http = p.Get();
+                Assert.AreEqual(HttpStatusCode.OK, _http.StatusCode);
+            }
+            catch (Exception e)
+            {
+                Assert.IsTrue(e.Message.Contains("Error"));
+            }            
         }
         [Test, TestCaseSource("GetTestDataControllerByID")]
         public void GetTasksByID(Parent _task)
