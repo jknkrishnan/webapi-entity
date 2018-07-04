@@ -54,5 +54,18 @@ namespace apiassignment
             }
             return ls;
         }
+
+        public int Delete(Parent ts)
+        {
+            int key = 0;
+            using (var taskcontext = new ParentContext())
+            {
+                ts = taskcontext.Parent.FirstOrDefault(x => x.Parent_Id == ts.Parent_Id);
+                taskcontext.Parent.Remove(ts);
+                taskcontext.SaveChanges();
+                key = ts.Parent_Id;
+            }
+            return key;
+        }
     }
 }

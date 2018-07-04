@@ -36,10 +36,10 @@ namespace apiassignment.business
             return ls;
         }
 
-        public int DeleteTaskById(int id)
+        public int DeleteTaskById(Task ts)
         {
             int l;
-            l = (new TaskRepository().DeleteTaskById(id));
+            l = (new TaskRepository().DeleteTaskById(ts));
             return l;
         }
     }

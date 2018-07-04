@@ -23,23 +23,14 @@ namespace apiassignment.api.Controllers
             catch(Exception ex)
             {
                 msg = ex.Message;
-            }
-              
-            if ((dt == null) || (msg != "") || (dt.Count() == 0))
-            {
-                if (msg == "")
-                {
-                    msg = "No tasks found";
-                }
                 var response = new HttpResponseMessage(HttpStatusCode.NotFound)
                 {
-                    Content = new StringContent(string.Format(msg)),  
-                        ReasonPhrase = "Error"
+                    Content = new StringContent(string.Format(msg)),
+                    ReasonPhrase = "Error"
                 };
                 return response;
-            }
+            }             
             return Request.CreateResponse(HttpStatusCode.OK, dt);
-
         }
 
         // GET: api/Task/5
@@ -55,21 +46,13 @@ namespace apiassignment.api.Controllers
             catch (Exception ex)
             {
                 msg = ex.Message;
-            }
-
-            if ((dt == null) || (msg != "") || (dt.Count() == 0))
-            {
-                if (msg == "")
-                {
-                    msg = "No tasks found by Id " + id;
-                }
                 var response = new HttpResponseMessage(HttpStatusCode.NotFound)
                 {
                     Content = new StringContent(string.Format(msg)),
                     ReasonPhrase = "Error"
-                };                
+                };
                 return response;
-            }
+            }           
             return Request.CreateResponse(HttpStatusCode.OK, dt);
             
         }
@@ -87,22 +70,15 @@ namespace apiassignment.api.Controllers
             catch(Exception ex)
             {
                 msg = ex.Message;
-
-            }
-            if ((key == null) || (msg != "") || (key.Count() == 0))
-            {
-                if (msg == "")
-                {
-                    msg = "Error in posting task";
-                }                  
                 var response = new HttpResponseMessage(HttpStatusCode.Conflict)
                 {
                     Content = new StringContent(string.Format(msg)),
                     ReasonPhrase = "Error"
                 };
                 return response;
-            }
-            return Request.CreateResponse(HttpStatusCode.OK, key);
+
+            }           
+            return Request.CreateResponse(HttpStatusCode.Created, key);
         }
 
         // PUT: api/Task/5
@@ -120,52 +96,38 @@ namespace apiassignment.api.Controllers
             catch(Exception ex)
             {
                 msg = ex.Message;
-            }
-            if ((key == null) || (msg != "") || (key.Count() == 0))
-            {
-                if (msg == "")
-                {
-                    msg = "Error in updating task";
-                }
                 response = new HttpResponseMessage(HttpStatusCode.Conflict)
                 {
                     Content = new StringContent(string.Format(msg)),
                     ReasonPhrase = "Error"
                 };
                 return response;
-            }
-            return Request.CreateResponse(HttpStatusCode.OK, key);
+            }           
+            return Request.CreateResponse(HttpStatusCode.Created, key);
 
         }
 
         // DELETE: api/Task/5
-        public HttpResponseMessage Delete(int id)
+        public HttpResponseMessage Delete([FromBody]Task ts)
         {
             string msg = "";
-            int key = id;
+            int key = 0;
             HttpResponseMessage response;           
             try
             {
-                key = new TaskBusiness().DeleteTaskById(id);
+                key = new TaskBusiness().DeleteTaskById(ts);
 
             }
             catch (Exception ex)
             {
                 msg = ex.Message;
-            }
-            if (key != 0)
-            {
-                if (msg == "")
-                {
-                    msg = "Error in deleting task";
-                }
                 response = new HttpResponseMessage(HttpStatusCode.Conflict)
                 {
                     Content = new StringContent(string.Format(msg)),
                     ReasonPhrase = "Error"
                 };
                 return response;
-            }
+            }           
             return Request.CreateResponse(HttpStatusCode.OK, key);
         }
     }

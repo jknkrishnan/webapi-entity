@@ -59,13 +59,14 @@ namespace apiassignment
             return ls;
         }
 
-        public int DeleteTaskById(int id)
+        public int DeleteTaskById(Task ts)
         {
             int l = 0;
             using (var taskcontext = new TaskContext())
             {
-               Task ts = taskcontext.Task.Find(id);
-               taskcontext.Task.Remove(ts);
+                //Task ts = taskcontext.Task.Find(id);
+                ts = taskcontext.Task.FirstOrDefault(x => x.Task_Id == ts.Task_Id);
+                taskcontext.Task.Remove(ts);
                taskcontext.SaveChanges();
                l = ts.Task_Id;
             }

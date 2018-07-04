@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apiassignment.datacontext",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apiassignment.api", "apiassignment.api\apiassignment.api.csproj", "{46084911-7E12-4974-A36E-A91A706D8147}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apiassignment.apiTests", "apiassignment.apiTests\apiassignment.apiTests.csproj", "{212E5FEF-DAF3-4C5F-9191-B85257BB2250}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{46084911-7E12-4974-A36E-A91A706D8147}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46084911-7E12-4974-A36E-A91A706D8147}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46084911-7E12-4974-A36E-A91A706D8147}.Release|Any CPU.Build.0 = Release|Any CPU
+		{212E5FEF-DAF3-4C5F-9191-B85257BB2250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{212E5FEF-DAF3-4C5F-9191-B85257BB2250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{212E5FEF-DAF3-4C5F-9191-B85257BB2250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{212E5FEF-DAF3-4C5F-9191-B85257BB2250}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

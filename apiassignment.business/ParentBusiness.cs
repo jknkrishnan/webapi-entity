@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace apiassignment.business
 {
-   public  class ParentBusiness
+    public class ParentBusiness
     {
         public List<Parent> GetParentTasks()
         {
@@ -27,7 +27,16 @@ namespace apiassignment.business
             List<Parent> ls;
             ls = (new ParentRepository().PostTaskById(ts));
             return ls;
+
         }
 
+        public int Delete(Parent ts)
+        {
+            int key;
+            key = (new ParentRepository().Delete(ts));
+            return key;
+        }
     }
+
+        
 }

@@ -22,14 +22,6 @@ namespace apiassignment.api.Controllers
             catch (Exception ex)
             {
                 msg = ex.Message;
-            }
-            if ((dt == null) || (msg != "") || (dt.Count() == 0))
-            {
-                if (msg == "")
-                {
-                    msg = "No tasks found";
-                    return Request.CreateResponse(HttpStatusCode.OK, dt);
-                }
                 var response = new HttpResponseMessage(HttpStatusCode.NotFound)
                 {
                     Content = new StringContent(string.Format(msg)),
@@ -52,14 +44,6 @@ namespace apiassignment.api.Controllers
             catch (Exception ex)
             {
                 msg = ex.Message;
-            }
-            if ((dt == null) || (msg != "") || (dt.Count() == 0))
-            {
-                if (msg == "")
-                {
-                    msg = "No tasks found by Id " + id;
-                    return Request.CreateResponse(HttpStatusCode.OK, dt);
-                }
                 var response = new HttpResponseMessage(HttpStatusCode.NotFound)
                 {
                     Content = new StringContent(string.Format(msg)),
@@ -84,14 +68,29 @@ namespace apiassignment.api.Controllers
             catch (Exception ex)
             {
                 msg = ex.Message;
+                var response = new HttpResponseMessage(HttpStatusCode.Conflict)
+                {
+                    Content = new StringContent(string.Format(msg)),
+                    ReasonPhrase = "Error"
+                };
+                return response;
+
+            }            
+            return Request.CreateResponse(HttpStatusCode.Created, key);
+        } 
+        
+        public HttpResponseMessage Delete([FromBody]Parent ts)
+        {
+            string msg = "";
+            int key = 0;
+            try
+            {
+                key = new ParentBusiness().Delete(ts);
 
             }
-            if ((key == null) || (msg != "") || (key.Count() == 0))
+            catch (Exception ex)
             {
-                if (msg == "")
-                {
-                    msg = "Error in posting task";
-                }
+                msg = ex.Message;
                 var response = new HttpResponseMessage(HttpStatusCode.Conflict)
                 {
                     Content = new StringContent(string.Format(msg)),
@@ -100,17 +99,7 @@ namespace apiassignment.api.Controllers
                 return response;
 
             }
-            return Request.CreateResponse(HttpStatusCode.Created, key);
-        }
-
-        // PUT: api/Parent/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Parent/5
-        public void Delete(int id)
-        {
+            return Request.CreateResponse(HttpStatusCode.OK, key); ;
         }
     }
 }
