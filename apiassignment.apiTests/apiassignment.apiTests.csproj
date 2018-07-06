@@ -45,6 +45,16 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NBench, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBench.1.1.0\lib\net452\NBench.dll</HintPath>
+    </Reference>
+    <Reference Include="NBench.PerformanceCounters, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBench.PerformanceCounters.1.1.0\lib\net452\NBench.PerformanceCounters.dll</HintPath>
+    </Reference>
+    <Reference Include="NBench.Runner, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBench.Runner.1.1.0\lib\net452\NBench.Runner.exe</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -77,6 +87,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ParentControllerTests.cs" />
     <Compile Include="Controllers\TaskControllerTests.cs" />
+    <Compile Include="NBench\TaskNBench.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,7 +102,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="NBenchReports\apiassignment.apiTests.NBench.TaskNBench+ParentGetBenchMark-636664608678152760.md" />
     <None Include="packages.config" />
+    <None Include="run.bat" />
     <None Include="TestData\ParentContoller.json" />
     <None Include="TestData\ParentControllerByID.json" />
     <None Include="TestData\TaskContoller.json" />
